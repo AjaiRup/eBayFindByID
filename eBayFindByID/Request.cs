@@ -22,16 +22,19 @@ namespace eBayFindByID
                 {
                     OperationContext.Current.OutgoingMessageHeaders.Add(header);
                     HttpRequestMessageProperty httpRequestProperty = new HttpRequestMessageProperty();
+                    //Create Header
                     httpRequestProperty.Headers.Add("X-EBAY-SOA-SECURITY-APPNAME", "AjaiRupa-Test-PRD-a43252cae-252f99e0");
                     httpRequestProperty.Headers.Add("X-EBAY-SOA-OPERATION-NAME", "findItemsByProduct");
                     httpRequestProperty.Headers.Add("X-EBAY-SOA-GLOBAL-ID", "EBAY-US");
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] = httpRequestProperty;
+                    //Construct Product Request 
                     FindItemsByProductRequest request = new FindItemsByProductRequest();
                     var prod = new ProductId();
                     request.productId = prod;
                     prod.type = "UPC";
                     prod.Value = Number.UpcNumber;
                     FindItemsByProductResponse response = client.findItemsByProduct(request);
+                    //Error Handling
                     if (response.ack != AckValue.Success)
                     {
                         Console.WriteLine(response.errorMessage[0].message + "\nPress escape to exit");

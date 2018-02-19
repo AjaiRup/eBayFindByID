@@ -22,6 +22,7 @@ namespace eBayFindByID
             Number.UpcNumber  = null;
             Console.WriteLine("What is the 12-digit UPC Number you would like to search?");
             Number.UpcNumber = Console.ReadLine();
+            //Confirm UPC Code is 12 digits with no letters
             while (Number.UpcNumber.Length != 12 || Regex.IsMatch(Number.UpcNumber, @"^\d+$") == false)
             {
                 Console.WriteLine("Invalid UPC format, please try again or press escape to exit");
